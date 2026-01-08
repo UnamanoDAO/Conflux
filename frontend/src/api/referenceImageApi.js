@@ -1,0 +1,235 @@
+import axios from 'axios'
+import { clearAllUserCache } from '../utils/cacheUtils'
+
+// API配置
+const API_BASE_URL = 'http://localhost:8088/api'
+
+// 创建axios实例
+const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+// 请求拦截器：添加认证token
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
+// 响应拦截器：处理认证失败
+apiClient.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      // 认证失败，清除所有用户缓存并跳转到登录页
+      clearAllUserCache()
+      window.location.href = '/login'
+    }
+    return Promise.reject(error)
+  }
+)
+
+/**
+ * 获取常用参考图列表（包括用户自己的和公共的）
+ * @returns {Promise<Object>} 包含参考图列表的响应对象
+ */
+export const getReferenceImages = async () => {
+  try {
+    const response = await apiClient.get('/reference-images/list')
+    return response.data
+  } catch (error) {
+    console.error('获取参考图列表失败:', error)
+    throw new Error(error.response?.data?.error || '获取参考图列表失败')
+  }
+}
+
+/**
+ * 上传新的参考图
+ * @param {File} file - 图片文件
+ * @param {string} name - 图片名称
+ * @param {string} category - 分类
+ * @returns {Promise<Object>} 添加的参考图信息
+ */
+export const uploadReferenceImage = async (file, name = '', category = 'default') => {
+  try {
+    const formData = new FormData()
+    formData.append('image', file)
+    formData.append('name', name || file.name)
+    formData.append('category', category)
+
+    console.log('上传参考图请求参数:', {
+      fileName: file.name,
+      fileSize: file.size,
+      name: name || file.name,
+      category
+    })
+
+    const response = await apiClient.post('/reference-images/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    console.log('上传参考图响应:', response.data)
+    return response.data
+  } catch (error) {
+    console.error('上传参考图失败:', error)
+    throw new Error(error.response?.data?.error || '上传参考图失败')
+  }
+}
+
+/**
+ * 添加常用参考图（兼容旧接口，实际调用新的上传接口）
+ * @param {Array<File>} files - 图片文件数组
+ * @returns {Promise<Array>} 添加的参考图信息
+ */
+export const addReferenceImages = async (files) => {
+  try {
+    const results = []
+
+    // 逐个上传文件
+    for (const file of files) {
+      const result = await uploadReferenceImage(file)
+      results.push(result.image)
+    }
+
+    return results
+  } catch (error) {
+    console.error('添加参考图失败:', error)
+    throw error
+  }
+}
+
+/**
+ * 删除单张常用参考图
+ * @param {string} imageId - 图片ID
+ * @returns {Promise} 删除结果
+ */
+export const deleteReferenceImage = async (imageId) => {
+  try {
+    const response = await apiClient.delete(`/reference-images/${imageId}`)
+    return response.data
+  } catch (error) {
+    console.error('删除参考图失败:', error)
+    throw new Error(error.response?.data?.error || '删除参考图失败')
+  }
+}
+
+/**
+ * 批量删除常用参考图
+ * @param {Array<string>} imageIds - 图片ID数组
+ * @returns {Promise} 删除结果
+ */
+export const batchDeleteReferenceImages = async (imageIds) => {
+  try {
+    const response = await apiClient.delete('/reference-images/batch', {
+      data: { imageIds }
+    })
+    return response.data
+  } catch (error) {
+    console.error('批量删除参考图失败:', error)
+    throw new Error(error.response?.data?.error || '批量删除参考图失败')
+  }
+}
+
+/**
+ * 根据ID获取参考图详情
+ * @param {string} imageId - 图片ID
+ * @returns {Promise<Object>} 参考图详情
+ */
+export const getReferenceImageById = async (imageId) => {
+  try {
+    const response = await apiClient.get(`/reference-images/${imageId}`)
+    return response.data
+  } catch (error) {
+    console.error('获取参考图详情失败:', error)
+    throw new Error(error.response?.data?.error || '获取参考图详情失败')
+  }
+}
+
+/**
+ * 更新参考图信息（如果需要的话）
+ * @param {string} imageId - 图片ID
+ * @param {Object} updateData - 更新数据
+ * @returns {Promise<Object>} 更新后的参考图信息
+ */
+export const updateReferenceImage = async (imageId, updateData) => {
+  try {
+    const response = await apiClient.put(`/reference-images/${imageId}`, updateData)
+    return response.data
+  } catch (error) {
+    console.error('更新参考图失败:', error)
+    throw new Error(error.response?.data?.error || '更新参考图失败')
+  }
+}
+
+/**
+ * 获取参考图分类列表
+ * @returns {Promise<Object>} 分类列表
+ */
+export const getReferenceImageCategories = async () => {
+  try {
+    const response = await apiClient.get('/reference-images/categories')
+    return response.data
+  } catch (error) {
+    console.error('获取分类列表失败:', error)
+    throw new Error(error.response?.data?.error || '获取分类列表失败')
+  }
+}
+
+/**
+ * 检查文件是否已上传（通过本地缓存）
+ * @param {File} file - 要检查的文件
+ * @returns {Object|null} 如果已存在返回图片信息，否则返回null
+ */
+export const checkFileUploaded = (file) => {
+  const fileKey = `${file.name}_${file.size}_${file.lastModified}`
+  const uploadedFiles = JSON.parse(localStorage.getItem('uploaded_reference_images') || '{}')
+
+  if (uploadedFiles[fileKey]) {
+    return uploadedFiles[fileKey]
+  }
+  return null
+}
+
+/**
+ * 记录已上传的文件到本地缓存
+ * @param {File} file - 已上传的文件
+ * @param {Object} imageData - 服务器返回的图片数据
+ */
+export const recordUploadedFile = (file, imageData) => {
+  const fileKey = `${file.name}_${file.size}_${file.lastModified}`
+  const uploadedFiles = JSON.parse(localStorage.getItem('uploaded_reference_images') || '{}')
+
+  uploadedFiles[fileKey] = {
+    id: imageData.id,
+    ossUrl: imageData.ossUrl,
+    uploadedAt: new Date().toISOString()
+  }
+
+  // 只保留最近100个记录
+  const keys = Object.keys(uploadedFiles)
+  if (keys.length > 100) {
+    const sortedKeys = keys.sort((a, b) => {
+      return new Date(uploadedFiles[b].uploadedAt) - new Date(uploadedFiles[a].uploadedAt)
+    })
+
+    const toDelete = sortedKeys.slice(100)
+    toDelete.forEach(key => delete uploadedFiles[key])
+  }
+
+  localStorage.setItem('uploaded_reference_images', JSON.stringify(uploadedFiles))
+}
+

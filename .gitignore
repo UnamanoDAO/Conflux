@@ -1,0 +1,94 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+build/
+*/dist/
+*/build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+
+# Temporary files
+*.tmp
+.cache/
+.temp/
+
+# Sensitive files - API keys and credentials
+*.key
+*.pem
+*.p12
+*.pfx
+config/keys.js
+config/secrets.js
+backend/config/keys.js
+backend/config/secrets.js
+
+# Documentation (except README)
+*.md
+!README.md
+
+# Test images and examples
+*.png
+*.jpg
+*.jpeg
+*.gif
+!public/**/*.png
+!public/**/*.jpg
+!public/**/*.jpeg
+!public/**/*.gif
+
+# Claude Code settings
+.claude/
+.claude/**
+
+# Backup files
+*.bak
+*.old
+*.backup
+*.fixed
+
+# Database files and migrations
+server/migrations/*.sql
+server/*.sql
+!server/migrations/.gitkeep
+
+# Test scripts and utilities
+server/test*.js
+server/clear-*.js
+server/disable-*.js
+server/fix-*.js
+server/migrate-*.js
+server/restore-*.js
+server/set-*.js
+server/update-*.js
+server/run-*.js
+
+# Build artifacts
+*.log

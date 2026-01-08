@@ -1,0 +1,57 @@
+# Node modules
+node_modules/
+**/node_modules/
+npm-debug.log
+yarn-error.log
+
+# 前端构建产物（会重新构建）
+frontend/dist/
+frontend/node_modules/
+
+# 后端临时文件
+server/node_modules/
+server/uploads/*
+!server/uploads/.gitkeep
+
+# 开发工具
+.git/
+.gitignore
+.vscode/
+.idea/
+*.log
+*.lock
+
+# 文档
+docs/
+*.md
+README.md
+
+# 测试文件
+**/*.test.js
+**/*.spec.js
+
+# 环境文件（敏感信息）
+.env
+.env.local
+.env.*.local
+
+# 数据库文件
+*.sql
+!server/init-db.sql
+!server/init-video-models-table.sql
+
+# 临时文件
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# 开发脚本
+start-dev.bat
+execute-*.bat
+execute-*.sh
+
+# 备份文件
+*.bak
+*.backup
+
