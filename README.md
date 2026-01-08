@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="image/LOGO.png" alt="变色龙AI" width="200"/>
+</div>
+
 # 变色龙AI图像生成平台 Chameleon AI Image Generation Platform
 
 [English](#english) | [中文](#chinese)
@@ -11,11 +15,32 @@ A powerful AI image generation platform supporting text-to-image, image-to-image
 
 ## Project Overview
 
-Chameleon AI Image Generation Platform is a complete full-stack web application that provides a user-friendly interface for using various AI models to generate images and videos. The platform supports multiple AI service providers and includes a comprehensive admin dashboard.
+**"Why did I build this project?"**
+
+This platform started from a simple need – I wanted to make AI content creation more convenient for my own daily use. Every feature here comes from real usage scenarios I encountered:
+
+- I frequently use one reference image to generate different scene variations, and it was tedious to re-upload the same image every time
+- When using LLM to generate 10 different prompts, I had to test them one by one by copying and clicking generate repeatedly
+- I wanted prompt generation to be integrated into the workflow, not require switching between different tools
+
+So I built this platform to solve these problems, and I'm continuously improving it based on my daily usage experience. This is a practical tool built by a user, for users.
 
 ## Key Features
 
-### Frontend Features
+### 💡 Features Built from Real Usage Scenarios
+
+#### 📸 **Saved Reference Images**
+Ever wanted to use one image to generate multiple variations but hated re-uploading it every time? I built this feature to save my commonly used reference images. Now I can generate dozens of different scene variations from the same reference without repetitive uploads.
+
+#### 🚀 **Batch Image Generation**
+When I use LLM to generate 10 different prompt variations for a scene, testing them one by one was painful. Now I can input all 10 prompts at once, click generate once, and watch them all being created automatically. Massive time saver!
+
+#### ✨ **Integrated Prompt Generation**
+Previously I had to generate prompts elsewhere, then copy them back. Now I can generate AI prompts directly within the platform and with one click, send them all to the batch generation menu (supports up to 10 different prompts at once). Seamless workflow!
+
+### Core Features
+
+#### Frontend Capabilities
 - **Text-to-Image**: Generate images from text descriptions using AI models
 - **Image-to-Image**: Generate new images based on reference images
 - **Video Generation**: Support for text-to-video and image-to-video
@@ -30,6 +55,28 @@ Chameleon AI Image Generation Platform is a complete full-stack web application 
 - **Content Management**: Manage platform content
 - **Credit Recharge**: User credit recharge management
 - **AI Prompt Generation**: AI-assisted prompt generation and management
+
+## 📸 Project Screenshots
+
+### Homepage
+<div align="center">
+  <img src="image/首页.png" alt="Homepage" width="800"/>
+</div>
+
+### Text to Image
+<div align="center">
+  <img src="image/文生图.png" alt="Text to Image" width="800"/>
+</div>
+
+### Image to Image
+<div align="center">
+  <img src="image/图生图.png" alt="Image to Image" width="800"/>
+</div>
+
+### AI Video Generation
+<div align="center">
+  <img src="image/AI生成视频.png" alt="AI Video Generation" width="800"/>
+</div>
 
 ## Tech Stack
 
@@ -313,13 +360,34 @@ Thanks to all developers who contributed to this project.
 
 一个功能强大的AI图像生成平台，支持文生图、图生图、视频生成等多种AI创作功能。
 
-## 项目简介
+## 💭 项目初衷
 
-变色龙AI图像生成平台是一个完整的全栈Web应用，提供用户友好的界面来使用各种AI模型进行图像和视频的生成。平台支持多个AI服务提供商，并提供了完善的管理后台。
+**"为什么我要做这个项目？"**
 
-## 主要特性
+其实做这个平台的初衷很简单——为了方便自己日常使用。每个功能都源于我在使用 AI 创作过程中遇到的真实痛点：
 
-### 前端功能
+- **常用参考图**：我经常会用一张图生成很多不同场景的图或者视频，每次都需要重新添加参考图就很麻烦
+- **批量生图**：比如一个场景用 LLM 生成了 10 个不同的提示词，要一个个试，需要把所有提示词都复制进去每次都点一下生成，现在支持全部输入完成后，点一次生成就可以
+- **提示词生成**：以前需要将提示词生成后复制过来，现在可以直接在项目里生成提示词后一键填入批量生成菜单里（一次最多生成 10 个不同的提示词）
+
+所以我就做了这个平台来解决这些问题，并且在日常使用中不断改进。这是一个由用户为用户打造的实用工具，后续有时间我会持续更新。
+
+## ✨ 项目特色
+
+### 💡 真实使用场景驱动的功能
+
+#### 📸 **常用参考图**
+有没有遇到过这种情况？想用一张图生成很多不同场景的变体，但每次都要重新上传参考图，特别麻烦。所以我做了这个功能，把我常用的参考图都保存起来，以后想用哪张直接选，不用重复上传。一张参考图可以生成几十种不同场景，效率提升明显！
+
+#### 🚀 **批量生图**
+这是我用得最多的功能。有时候用 LLM 生成了一个场景的 10 个不同提示词，想一个个试试看效果，原来要复制 10 次，点 10 次生成。现在把所有提示词一次输进去，点一次生成，全都自动开始生成了，省了好多重复操作。
+
+#### ✨ **提示词一键生成**
+以前得在其他地方生成提示词，然后再复制回来。现在直接在项目里就能用 AI 生成提示词，生成完还能一键填入批量生成菜单（一次最多生成 10 个不同的提示词），整个流程无缝衔接。
+
+### 核心功能
+
+#### 前端能力
 - **文生图**: 使用AI模型根据文本描述生成图像
 - **图生图**: 基于参考图像生成新的图像
 - **视频生成**: 支持文生视频和图生视频
@@ -334,6 +402,28 @@ Thanks to all developers who contributed to this project.
 - **内容管理**: 管理平台上的内容
 - **积分充值**: 用户积分充值管理
 - **AI提示词生成**: AI辅助提示词生成和管理
+
+## 📸 项目截图
+
+### 首页
+<div align="center">
+  <img src="image/首页.png" alt="首页" width="800"/>
+</div>
+
+### 文生图
+<div align="center">
+  <img src="image/文生图.png" alt="文生图" width="800"/>
+</div>
+
+### 图生图
+<div align="center">
+  <img src="image/图生图.png" alt="图生图" width="800"/>
+</div>
+
+### AI视频生成
+<div align="center">
+  <img src="image/AI生成视频.png" alt="AI视频生成" width="800"/>
+</div>
 
 ## 技术栈
 

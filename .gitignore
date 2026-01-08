@@ -63,6 +63,10 @@ backend/config/secrets.js
 !public/**/*.jpg
 !public/**/*.jpeg
 !public/**/*.gif
+!image/**/*.png
+!image/**/*.jpg
+!image/**/*.jpeg
+!image/**/*.gif
 
 # Claude Code settings
 .claude/
