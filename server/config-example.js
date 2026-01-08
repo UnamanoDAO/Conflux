@@ -28,8 +28,8 @@ module.exports = {
   
   // API配置
   api: {
-    baseUrl: process.env.API_BASE_URL || 'https://api.openai-hk.com',
-    key: process.env.API_KEY || 'hk-zp1lsl1000036757b89a1f7b4898569a407c41d7acce31fb'
+    baseUrl: process.env.API_BASE_URL || '',
+    key: process.env.API_KEY || ''
   }
 };
 
