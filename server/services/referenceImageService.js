@@ -31,11 +31,12 @@ class ReferenceImageService {
     return rows;
   }
 
-  // 获取所有公共参考图（管理员上传的）
+  // 获取所有公共参考图（只有标记为公共的图片）
   async getPublicReferenceImages(category = null) {
     let query = `
       SELECT * FROM reference_images
-      WHERE user_id = 1
+      WHERE is_public = 1
+      AND (is_prompt_reference = 0 OR is_prompt_reference IS NULL)
       ORDER BY created_at DESC
     `;
     const params = [];
@@ -43,7 +44,9 @@ class ReferenceImageService {
     if (category) {
       query = `
         SELECT * FROM reference_images
-        WHERE user_id = 1 AND category = ?
+        WHERE is_public = 1
+        AND (is_prompt_reference = 0 OR is_prompt_reference IS NULL)
+        AND category = ?
         ORDER BY created_at DESC
       `;
       params.push(category);

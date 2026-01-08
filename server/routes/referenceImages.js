@@ -21,17 +21,10 @@ router.get('/list', async (req, res) => {
       });
     }
 
-    // 获取用户自己的参考图
+    // 安全：只获取用户自己的参考图，不显示公共图片
     const userImages = await req.app.locals.referenceImageService.getUserReferenceImages(userId);
 
-    // 获取公共参考图
-    const publicImages = await req.app.locals.referenceImageService.getPublicReferenceImages();
-
-    // 合并并标记来源
-    let allImages = [
-      ...userImages.map(img => ({ ...img, isPublic: false })),
-      ...publicImages.map(img => ({ ...img, isPublic: true }))
-    ];
+    let allImages = userImages.map(img => ({ ...img, isPublic: false }));
 
     // 如果提供了 since 参数，只返回更新的图片
     let deletedIds = [];
@@ -45,7 +38,6 @@ router.get('/list', async (req, res) => {
         return updatedAt > sinceDate || createdAt > sinceDate;
       });
 
-      // 如果需要检测删除的图片，可以通过比较客户端提供的ID列表
       // 为简化，这里只返回新增和更新的图片
       allImages = updatedImages;
 
@@ -81,7 +73,7 @@ router.get('/list', async (req, res) => {
         originalName: img.original_name,
         size: img.size,
         mimeType: img.mime_type,
-        isPublic: img.isPublic,
+        isPublic: false, // 所有图片都是用户自己的
         createdAt: img.created_at,
         updatedAt: img.updated_at
       })),

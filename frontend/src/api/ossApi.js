@@ -3,12 +3,12 @@ import axios from 'axios'
 // OSS配置
 const OSS_CONFIG = {
   region: 'oss-cn-beijing',
-  accessKeyId: process.env.VITE_OSS_ACCESS_KEY_ID || '',
-  accessKeySecret: process.env.VITE_OSS_ACCESS_KEY_SECRET || '',
-  bucket: process.env.VITE_OSS_BUCKET || '',
-  endpoint: process.env.VITE_OSS_ENDPOINT || 'https://oss-cn-beijing.aliyuncs.com',
+  accessKeyId: import.meta.env.VITE_OSS_ACCESS_KEY_ID || '',
+  accessKeySecret: import.meta.env.VITE_OSS_ACCESS_KEY_SECRET || '',
+  bucket: import.meta.env.VITE_OSS_BUCKET || '',
+  endpoint: import.meta.env.VITE_OSS_ENDPOINT || 'https://oss-cn-beijing.aliyuncs.com',
   // OSS POST上传的URL
-  uploadUrl: process.env.VITE_OSS_UPLOAD_URL || ''
+  uploadUrl: import.meta.env.VITE_OSS_UPLOAD_URL || ''
 }
 
 /**
