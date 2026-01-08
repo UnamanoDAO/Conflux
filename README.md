@@ -38,6 +38,18 @@ When I use LLM to generate 10 different prompt variations for a scene, testing t
 #### ✨ **Integrated Prompt Generation**
 Previously I had to generate prompts elsewhere, then copy them back. Now I can generate AI prompts directly within the platform and with one click, send them all to the batch generation menu (supports up to 10 different prompts at once). Seamless workflow!
 
+### Supported AI Models
+
+#### 🎨 Image Generation Models
+```
+Nano-banana2  |  doubao-seedream-4-5  |  阿里Wan生图  |  flux-2-dev  |  GPT-Image  |  Grok
+```
+
+#### 🎬 Video Generation Models
+```
+doubao-seedance-1-0-pro  |  doubao-seedance-1-0-lite-i2v  |  veo3.1-pro  |  阿里Wan  |  Grok
+```
+
 ### Core Features
 
 #### Frontend Capabilities
@@ -386,6 +398,18 @@ Thanks to all developers who contributed to this project.
 以前得在其他地方生成提示词，然后再复制回来。现在直接在项目里就能用 AI 生成提示词，生成完还能一键填入批量生成菜单（一次最多生成 10 个不同的提示词），整个流程无缝衔接。
 
 ### 核心功能
+
+### 🤖 支持的 AI 模型
+
+#### 🎨 图像生成模型
+```
+Nano-banana2  |  doubao-seedream-4-5  |  阿里Wan生图  |  flux-2-dev  |  GPT-Image  |  Grok
+```
+
+#### 🎬 视频生成模型
+```
+doubao-seedance-1-0-pro  |  doubao-seedance-1-0-lite-i2v  |  veo3.1-pro  |  阿里Wan  |  Grok
+```
 
 #### 前端能力
 - **文生图**: 使用AI模型根据文本描述生成图像
