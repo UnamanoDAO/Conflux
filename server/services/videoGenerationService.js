@@ -3,8 +3,8 @@ const FormData = require('form-data');
 
 class VideoGenerationService {
   constructor() {
-    this.apiKey = process.env.DOUBAO_API_KEY || 'sk-qbeSbFvt5Le7YySGK4SHCgLiJGrJD9qibjp4lNeeHJVqaDqa';
-    this.baseUrl = 'https://api.bltcy.ai';
+    this.apiKey = process.env.DOUBAO_API_KEY || '';
+    this.baseUrl = '';
   }
 
   /**
