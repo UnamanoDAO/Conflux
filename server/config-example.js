@@ -28,7 +28,7 @@ module.exports = {
   
   // API配置
   api: {
-    baseUrl: process.env.API_BASE_URL || '',
+    baseUrl: process.env.API_BASE_URL || 'https://api.example.com',
     key: process.env.API_KEY || ''
   }
 };

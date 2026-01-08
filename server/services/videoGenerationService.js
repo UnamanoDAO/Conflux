@@ -4,7 +4,7 @@ const FormData = require('form-data');
 class VideoGenerationService {
   constructor() {
     this.apiKey = process.env.DOUBAO_API_KEY || '';
-    this.baseUrl = '';
+    this.baseUrl = process.env.DOUBAO_API_BASE_URL || 'https://api.example.com';
   }
 
   /**

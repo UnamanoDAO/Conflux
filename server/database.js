@@ -121,11 +121,12 @@ const initDatabase = async () => {
     // 检查是否有默认图像模型，如果没有则插入
     const [existingImageModels] = await pool.execute('SELECT COUNT(*) as count FROM ai_models WHERE is_default = TRUE');
     if (existingImageModels[0].count === 0) {
+      // 注意：默认模型需要管理员在后台配置真实API信息
       await pool.execute(`
         INSERT INTO ai_models (name, description, api_key, base_url, is_active, is_default)
-        VALUES ('nano-banana', '默认的AI图像生成模型', 'hk-zp1lsl1000036757b89a1f7b4898569a407c41d7acce31fb', 'https://api.openai-hk.com', TRUE, TRUE)
+        VALUES ('nano-banana', '默认的AI图像生成模型（需配置API）', '', 'https://api.example.com', FALSE, TRUE)
       `);
-      console.log('默认图像模型已插入');
+      console.log('默认图像模型已插入（请在后台配置API信息）');
     }
 
     // 创建AI文本模型配置表
@@ -187,11 +188,12 @@ const initDatabase = async () => {
     // 检查是否有默认文本模型，如果没有则插入
     const [existingTextModels] = await pool.execute('SELECT COUNT(*) as count FROM ai_text_models WHERE is_default = TRUE');
     if (existingTextModels[0].count === 0) {
+      // 注意：默认模型需要管理员在后台配置真实API信息
       await pool.execute(`
         INSERT INTO ai_text_models (display_name, model_name, api_url, api_key, role_name, role_content, is_active, is_default)
-        VALUES ('GPT-4提示词生成器', 'gpt-4-turbo', 'https://api.openai.com/v1/chat/completions', 'sk-your-api-key-here', '提示词专家', '你是一个专业的AI图像生成提示词专家，擅长将用户的简单描述转换为详细的、适合AI图像生成的英文提示词。你需要：1. 理解用户的中文描述；2. 生成详细的英文提示词；3. 包含风格、光线、氛围、质量等细节；4. 使用逗号分隔关键词；5. 确保提示词适合Stable Diffusion、Midjourney等AI图像生成工具。', TRUE, TRUE)
+        VALUES ('GPT-4提示词生成器', 'gpt-4-turbo', 'https://api.example.com', '', '提示词专家', '你是一个专业的AI图像生成提示词专家，擅长将用户的简单描述转换为详细的、适合AI图像生成的英文提示词。你需要：1. 理解用户的中文描述；2. 生成详细的英文提示词；3. 包含风格、光线、氛围、质量等细节；4. 使用逗号分隔关键词；5. 确保提示词适合Stable Diffusion、Midjourney等AI图像生成工具。', FALSE, TRUE)
       `);
-      console.log('默认文本模型已插入');
+      console.log('默认文本模型已插入（请在后台配置API信息）');
     }
 
     console.log('数据库表初始化成功');

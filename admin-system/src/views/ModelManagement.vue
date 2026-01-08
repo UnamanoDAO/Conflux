@@ -418,10 +418,7 @@ export default {
       if (modelForm.provider !== 'doubao') {
         modelForm.video_model_id = ''
       }
-      // 根据厂商设置默认API地址
-      if (modelForm.provider === 'doubao' && !modelForm.base_url) {
-        modelForm.base_url = 'https://api.bltcy.ai'
-      }
+      // 注意：不再自动填充API地址，需要用户手动配置
     }
     
     // 处理模型类型变更
